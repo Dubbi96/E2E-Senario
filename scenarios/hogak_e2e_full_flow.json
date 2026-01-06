@@ -1,0 +1,91 @@
+{
+  "base_url": "https://hogak.live",
+  "steps": [
+    {
+      "type": "go",
+      "url": "https://hogak.live/main",
+      "delay_ms": 1200
+    },
+    {
+      "type": "wait_visible",
+      "text": "경기일정",
+      "timeout": 15000
+    },
+    {
+      "type": "screenshot",
+      "name": "01_main_page"
+    },
+    {
+      "type": "go",
+      "url": "https://hogak.live/search",
+      "delay_ms": 1200
+    },
+    {
+      "type": "wait_visible",
+      "text": "검색",
+      "timeout": 15000
+    },
+    {
+      "type": "fill",
+      "selector": "input[type='search'], input[placeholder*='검색'], #searchInput",
+      "value": "K리그",
+      "delay_ms": 300
+    },
+    {
+      "type": "click",
+      "selectors": [
+        "#btnSearch",
+        "button:has-text('검색')",
+        "button[type='submit']",
+        ".btn_search"
+      ]
+    },
+    {
+      "type": "wait_visible",
+      "text": "검색결과",
+      "timeout": 15000
+    },
+    {
+      "type": "screenshot",
+      "name": "02_search_results"
+    },
+    {
+      "type": "click",
+      "selectors": [
+        "li:has-text('K리그'):first-child",
+        ".result-item:first-child a",
+        "a[href*='/vod/']:first-child",
+        ".vod-item:first-child"
+      ]
+    },
+    {
+      "type": "wait_visible",
+      "selectors": [
+        "video",
+        ".player-container",
+        ".video-player",
+        "#player"
+      ],
+      "timeout": 20000
+    },
+    {
+      "type": "screenshot",
+      "name": "03_player_loaded"
+    },
+    {
+      "type": "go",
+      "url": "https://hogak.live/vod",
+      "delay_ms": 1200
+    },
+    {
+      "type": "wait_visible",
+      "text": "VOD",
+      "timeout": 15000
+    },
+    {
+      "type": "screenshot",
+      "name": "04_vod_list"
+    }
+  ]
+}
+

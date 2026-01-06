@@ -1,0 +1,34 @@
+{
+  "base_url": "https://hogak.live",
+  "requires_auth": false,
+  "_meta": {
+    "ScenarioID": "INFO-01",
+    "구분": "정보/정책",
+    "우선순위": "P2",
+    "시나리오명": "회사소개/정책 문서 접근",
+    "목적/범위": "정책/소개 페이지 접근 및 렌더링 검증",
+    "사전조건": "네트워크 가능",
+    "테스트데이터": "정책 URL",
+    "Steps(원문)": "1) 회사소개/정책 진입\n2) 웹뷰/외부 링크 확인\n3) 뒤로가기/복귀",
+    "기대결과": "정상 로딩, 접근성/오류 처리",
+    "연동시스템": "외부웹",
+    "검증/로그 포인트": "링크 만료/SSL 오류 처리",
+    "TODO/확인필요": "__TODO__ 정책 문서 URL/버전관리"
+  },
+  "steps": [
+    {
+      "type": "go",
+      "url": "https://hogak.live/main",
+      "delay_ms": 1200
+    },
+    {
+      "type": "wait_visible",
+      "text": "경기일정",
+      "timeout": 15000
+    },
+    {
+      "type": "screenshot",
+      "name": "INFO-01_final"
+    }
+  ]
+}

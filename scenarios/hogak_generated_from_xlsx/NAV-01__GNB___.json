@@ -1,0 +1,34 @@
+{
+  "base_url": "https://hogak.live",
+  "requires_auth": true,
+  "_meta": {
+    "ScenarioID": "NAV-01",
+    "구분": "탐색/구성",
+    "우선순위": "P0",
+    "시나리오명": "GNB 기반 기본 탐색",
+    "목적/범위": "주요 탭(LIVE/VOD/대회·리그/촬영/마이페이지/설정) 진입 검증",
+    "사전조건": "로그인 상태",
+    "테스트데이터": "-",
+    "Steps(원문)": "1) LIVE 탭\n2) VOD 탭\n3) 대회/리그/매치/팀 탭\n4) 촬영모드\n5) 마이페이지\n6) 설정",
+    "기대결과": "각 화면 진입/복귀 정상, 상태 유지 정책 확인",
+    "연동시스템": "-",
+    "검증/로그 포인트": "탭 전환 시 크래시/로딩 시간",
+    "TODO/확인필요": ""
+  },
+  "steps": [
+    {
+      "type": "go",
+      "url": "https://hogak.live/main",
+      "delay_ms": 1200
+    },
+    {
+      "type": "wait_visible",
+      "text": "경기일정",
+      "timeout": 15000
+    },
+    {
+      "type": "screenshot",
+      "name": "NAV-01_final"
+    }
+  ]
+}

@@ -1,0 +1,34 @@
+{
+  "base_url": "https://hogak.live",
+  "requires_auth": true,
+  "_meta": {
+    "ScenarioID": "PLAY-01",
+    "구분": "재생",
+    "우선순위": "P0",
+    "시나리오명": "VOD 재생(기본)",
+    "목적/범위": "플레이어 기본 기능 검증",
+    "사전조건": "VOD 콘텐츠 존재",
+    "테스트데이터": "VOD 1건",
+    "Steps(원문)": "1) VOD 상세 진입\n2) 재생/일시정지\n3) 시킹(앞/뒤)\n4) 종료",
+    "기대결과": "정상 재생, 컨트롤 동작, 종료 후 복귀",
+    "연동시스템": "CDN/플레이어",
+    "검증/로그 포인트": "버퍼링/에러코드/DRM(있다면)",
+    "TODO/확인필요": ""
+  },
+  "steps": [
+    {
+      "type": "go",
+      "url": "https://hogak.live/main",
+      "delay_ms": 1200
+    },
+    {
+      "type": "wait_visible",
+      "text": "경기일정",
+      "timeout": 15000
+    },
+    {
+      "type": "screenshot",
+      "name": "PLAY-01_final"
+    }
+  ]
+}

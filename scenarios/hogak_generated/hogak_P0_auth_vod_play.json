@@ -1,0 +1,60 @@
+{
+  "base_url": "https://hogak.live",
+  "requires_auth": true,
+  "_meta": {
+    "source": "xlsx: NAV-01 + PLAY-01",
+    "note": "Apple 로그인은 headless에서 불안정하므로 storageState 주입(E2E_STORAGE_STATE_PATH/B64)을 전제로 합니다."
+  },
+  "steps": [
+    {
+      "type": "go",
+      "url": "https://hogak.live/main",
+      "delay_ms": 1200
+    },
+    {
+      "type": "wait_visible",
+      "text": "경기일정",
+      "timeout": 15000
+    },
+    {
+      "type": "ensure_logged_in",
+      "selector": "#btnUser",
+      "logged_out_text": "로그인"
+    },
+    {
+      "type": "go",
+      "url": "https://hogak.live/vod",
+      "delay_ms": 1200
+    },
+    {
+      "type": "wait_visible",
+      "text": "VOD",
+      "timeout": 15000
+    },
+    {
+      "type": "click",
+      "selectors": [
+        "a[href*='/vod/']:first-child",
+        ".vod-item:first-child",
+        ".result-item:first-child a",
+        "li:has-text('VOD'):first-child"
+      ]
+    },
+    {
+      "type": "wait_visible",
+      "selectors": [
+        "video",
+        ".player-container",
+        ".video-player",
+        "#player"
+      ],
+      "timeout": 20000
+    },
+    {
+      "type": "screenshot",
+      "name": "vod_player_loaded"
+    }
+  ]
+}
+
+

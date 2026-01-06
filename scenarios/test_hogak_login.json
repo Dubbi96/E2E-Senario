@@ -1,0 +1,83 @@
+{
+  "base_url": "https://hogak.live",
+  "steps": [
+    {
+      "type": "go",
+      "url": "https://hogak.live/main",
+      "frame": {
+        "href": "https://hogak.live/main",
+        "isTop": true,
+        "name": ""
+      }
+    },
+    {
+      "type": "expect_text",
+      "selector": "#btnUser",
+      "text": "로그인 ∨",
+      "frame": {
+        "href": "https://hogak.live/main",
+        "isTop": true,
+        "name": ""
+      }
+    },
+    {
+      "type": "click",
+      "selector": "#btnUser",
+      "delay_ms": 200,
+      "frame": {
+        "href": "https://hogak.live/main",
+        "isTop": true,
+        "name": ""
+      }
+    },
+    {
+      "type": "wait_visible",
+      "text": "로그인 하세요!",
+      "timeout": 15000,
+      "frame": {
+        "href": "https://hogak.live/main",
+        "isTop": true,
+        "name": ""
+      }
+    },
+    {
+      "type": "expect_text",
+      "selector": "div.info-top.flex > div:nth-of-type(1)",
+      "text": "로그인 하세요!",
+      "frame": {
+        "href": "https://hogak.live/main",
+        "isTop": true,
+        "name": ""
+      }
+    },
+    {
+      "type": "click",
+      "selector": "div.info-top.flex > div:nth-of-type(1)",
+      "delay_ms": 200,
+      "frame": {
+        "href": "https://hogak.live/main",
+        "isTop": true,
+        "name": ""
+      }
+    },
+    {
+      "type": "wait_url",
+      "url": "https://hogak.live/login_t",
+      "timeout": 15000
+    },
+    {
+      "type": "expect_text",
+      "selector": "div.login_logo > div:nth-of-type(2)",
+      "text": "내 경기 실시간 중계",
+      "frame": {
+        "href": "https://hogak.live/login_t",
+        "isTop": true,
+        "name": ""
+      }
+    }
+  ],
+  "_meta": {
+    "source": "chrome_extension_recorder_v1"
+  }
+}
+

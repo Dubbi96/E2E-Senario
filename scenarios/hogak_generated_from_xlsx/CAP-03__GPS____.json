@@ -1,0 +1,34 @@
+{
+  "base_url": "https://hogak.live",
+  "requires_auth": true,
+  "_meta": {
+    "ScenarioID": "CAP-03",
+    "구분": "촬영/스트리밍",
+    "우선순위": "P1",
+    "시나리오명": "위치/GPS 권한 거부 시 처리",
+    "목적/범위": "OS 권한 거부 UX 및 대체 동작 검증",
+    "사전조건": "OS에서 위치 권한 거부",
+    "테스트데이터": "-",
+    "Steps(원문)": "1) 위치 권한 거부 상태\n2) 촬영 진입\n3) 권한 요청/가이드 확인",
+    "기대결과": "가이드 노출, 권한 허용 유도 또는 기능 제한",
+    "연동시스템": "GPS",
+    "검증/로그 포인트": "권한 요청 반복 정책",
+    "TODO/확인필요": ""
+  },
+  "steps": [
+    {
+      "type": "go",
+      "url": "https://hogak.live/main",
+      "delay_ms": 1200
+    },
+    {
+      "type": "wait_visible",
+      "text": "경기일정",
+      "timeout": 15000
+    },
+    {
+      "type": "screenshot",
+      "name": "CAP-03_final"
+    }
+  ]
+}

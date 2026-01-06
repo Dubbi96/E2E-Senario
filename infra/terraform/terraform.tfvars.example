@@ -1,0 +1,40 @@
+project            = "dubbi-e2e"
+aws_region         = "ap-northeast-3"
+
+# --- 네트워크(기존 VPC) ---
+vpc_id             = "vpc-xxxxxxxx"
+public_subnet_ids  = ["subnet-aaaaaaa", "subnet-bbbbbbb"]
+private_subnet_ids = ["subnet-ccccccc", "subnet-ddddddd"]
+
+# --- 컨테이너 이미지 ---
+api_image    = "123456789012.dkr.ecr.ap-northeast-2.amazonaws.com/dubbi-e2e-api:latest"
+worker_image = "123456789012.dkr.ecr.ap-northeast-2.amazonaws.com/dubbi-e2e-worker:latest"
+
+# --- 보안/시크릿 ---
+jwt_secret_key = "CHANGE_ME"
+db_password    = "CHANGE_ME"
+
+# --- 리소스 사이징(최소 비용 예시) ---
+api_desired_count    = 1
+worker_desired_count = 1
+
+api_cpu    = 512
+api_memory = 1024
+
+worker_cpu    = 1024
+worker_memory = 2048
+
+db_instance_class        = "db.t4g.micro"
+db_allocated_storage_gb  = 20
+redis_node_type          = "cache.t4g.micro"
+efs_lifecycle_to_ia_days = 7
+
+# --- 프론트 정적 배포(선택) ---
+enable_frontend_s3  = false
+frontend_domain_name = ""
+
+tags = {
+  env = "prod"
+}
+
+

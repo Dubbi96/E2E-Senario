@@ -1,0 +1,34 @@
+{
+  "base_url": "https://hogak.live",
+  "requires_auth": true,
+  "_meta": {
+    "ScenarioID": "SET-01",
+    "구분": "설정",
+    "우선순위": "P1",
+    "시나리오명": "설정 변경 및 유지",
+    "목적/범위": "설정 변경 후 재접속 유지 검증",
+    "사전조건": "로그인 상태",
+    "테스트데이터": "알림/계정 설정 값",
+    "Steps(원문)": "1) 설정 변경\n2) 앱 종료/재실행\n3) 설정 값 유지 확인",
+    "기대결과": "설정 값 지속, 서버 동기화 정상",
+    "연동시스템": "내부DB",
+    "검증/로그 포인트": "설정 저장 API/실패 처리",
+    "TODO/확인필요": "__TODO__ 설정 항목 리스트 확정"
+  },
+  "steps": [
+    {
+      "type": "go",
+      "url": "https://hogak.live/main",
+      "delay_ms": 1200
+    },
+    {
+      "type": "wait_visible",
+      "text": "경기일정",
+      "timeout": 15000
+    },
+    {
+      "type": "screenshot",
+      "name": "SET-01_final"
+    }
+  ]
+}

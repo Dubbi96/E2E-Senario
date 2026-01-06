@@ -1,0 +1,34 @@
+{
+  "base_url": "https://hogak.live",
+  "requires_auth": true,
+  "_meta": {
+    "ScenarioID": "ENG-04",
+    "구분": "상호작용",
+    "우선순위": "P0",
+    "시나리오명": "콘텐츠 신고(접수)",
+    "목적/범위": "신고 접수/사유 선택/제출 검증",
+    "사전조건": "로그인 상태",
+    "테스트데이터": "신고 대상 콘텐츠",
+    "Steps(원문)": "1) 신고 클릭\n2) 사유 선택\n3) 제출\n4) 접수 안내 확인",
+    "기대결과": "접수 성공, 중복 신고 정책 적용",
+    "연동시스템": "내부CS/운영",
+    "검증/로그 포인트": "신고ID/상태코드",
+    "TODO/확인필요": "__TODO__ 신고 사유 목록/중복 처리"
+  },
+  "steps": [
+    {
+      "type": "go",
+      "url": "https://hogak.live/main",
+      "delay_ms": 1200
+    },
+    {
+      "type": "wait_visible",
+      "text": "경기일정",
+      "timeout": 15000
+    },
+    {
+      "type": "screenshot",
+      "name": "ENG-04_final"
+    }
+  ]
+}

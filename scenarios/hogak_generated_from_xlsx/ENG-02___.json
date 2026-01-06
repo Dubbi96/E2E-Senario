@@ -1,0 +1,34 @@
+{
+  "base_url": "https://hogak.live",
+  "requires_auth": true,
+  "_meta": {
+    "ScenarioID": "ENG-02",
+    "구분": "상호작용",
+    "우선순위": "P0",
+    "시나리오명": "좋아요 등록/취소",
+    "목적/범위": "좋아요 상태 및 중복 클릭 방지 검증",
+    "사전조건": "로그인 상태",
+    "테스트데이터": "콘텐츠 1건",
+    "Steps(원문)": "1) 좋아요 ON\n2) 연속 클릭\n3) 좋아요 OFF(가능 시)",
+    "기대결과": "중복 처리 방지, 상태 일관성",
+    "연동시스템": "내부DB",
+    "검증/로그 포인트": "좋아요 카운트 동시성",
+    "TODO/확인필요": "__TODO__ 좋아요 취소 가능 여부"
+  },
+  "steps": [
+    {
+      "type": "go",
+      "url": "https://hogak.live/main",
+      "delay_ms": 1200
+    },
+    {
+      "type": "wait_visible",
+      "text": "경기일정",
+      "timeout": 15000
+    },
+    {
+      "type": "screenshot",
+      "name": "ENG-02_final"
+    }
+  ]
+}

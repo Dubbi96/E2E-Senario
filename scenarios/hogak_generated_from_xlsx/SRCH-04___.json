@@ -1,0 +1,64 @@
+{
+  "base_url": "https://hogak.live",
+  "requires_auth": true,
+  "_meta": {
+    "ScenarioID": "SRCH-04",
+    "구분": "검색",
+    "우선순위": "P2",
+    "시나리오명": "검색어 예외(공백/특수문자/초장문/이모지)",
+    "목적/범위": "입력 검증 및 안정성 검증",
+    "사전조건": "로그인 상태",
+    "테스트데이터": "예외 문자열 세트",
+    "Steps(원문)": "1) 각 예외 입력\n2) 검색 실행\n3) 에러/UX 확인",
+    "기대결과": "서비스 장애 없이 안전 처리, 적절한 메시지",
+    "연동시스템": "검색",
+    "검증/로그 포인트": "WAF/입력검증 로그",
+    "TODO/확인필요": ""
+  },
+  "steps": [
+    {
+      "type": "go",
+      "url": "https://hogak.live/main",
+      "delay_ms": 1200
+    },
+    {
+      "type": "wait_visible",
+      "text": "경기일정",
+      "timeout": 15000
+    },
+    {
+      "type": "go",
+      "url": "https://hogak.live/search",
+      "delay_ms": 1200
+    },
+    {
+      "type": "wait_visible",
+      "text": "검색",
+      "timeout": 15000
+    },
+    {
+      "type": "fill",
+      "selector": "input[type='search'], input[placeholder*='검색'], #searchInput",
+      "value": "K리그",
+      "delay_ms": 300
+    },
+    {
+      "type": "click",
+      "selectors": [
+        "#btnSearch",
+        "button:has-text('검색')",
+        "button[type='submit']",
+        ".btn_search"
+      ]
+    },
+    {
+      "type": "wait_visible",
+      "text": "검색결과",
+      "timeout": 15000
+    },
+    {
+      "type": "screenshot",
+      "name": "SRCH-04_final"
+    }
+  ]
+}

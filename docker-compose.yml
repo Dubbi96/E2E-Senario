@@ -1,0 +1,41 @@
+services:
+  api:
+    build:
+      context: .
+      dockerfile: Dockerfile.api
+    environment:
+      - REDIS_URL=redis://redis:6379/0
+      - DATABASE_URL=postgresql+psycopg://postgres:postgres@db:5432/e2e
+      - ARTIFACT_ROOT=/data/artifacts
+    volumes:
+      - ./artifacts:/data/artifacts
+    ports:
+      - "8000:8000"
+    depends_on:
+      - redis
+      - db
+
+  worker:
+    build:
+      context: .
+      dockerfile: Dockerfile.worker
+    environment:
+      - REDIS_URL=redis://redis:6379/0
+      - DATABASE_URL=postgresql+psycopg://postgres:postgres@db:5432/e2e
+      - ARTIFACT_ROOT=/data/artifacts
+    volumes:
+      - ./artifacts:/data/artifacts
+    depends_on:
+      - redis
+      - db
+
+  redis:
+    image: redis:7-alpine
+
+  db:
+    image: postgres:16-alpine
+    environment:
+      - POSTGRES_PASSWORD=postgres
+      - POSTGRES_DB=e2e
+    ports:
+      - "5432:5432"

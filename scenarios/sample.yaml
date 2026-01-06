@@ -1,0 +1,9 @@
+base_url: "https://example.com"
+steps:
+  - type: go
+    url: "https://example.com"
+  - type: screenshot
+    name: "home"
+  - type: expect_text
+    selector: "h1"
+    text: "Example Domain"

@@ -1,0 +1,36 @@
+[tool.poetry]
+name = "e2e-service"
+version = "0.1.0"
+description = "Scenario-driven E2E test service"
+authors = ["you"]
+
+[tool.poetry.dependencies]
+python = "^3.11"
+fastapi = "^0.115.0"
+uvicorn = {extras = ["standard"], version = "^0.30.0"}
+pydantic = "^2.8.0"
+pydantic-settings = "^2.4.0"
+sqlalchemy = "^2.0.0"
+psycopg = {extras = ["binary"], version = "^3.2.0"}
+celery = "^5.4.0"
+redis = "^5.0.0"
+pyyaml = "^6.0.2"
+playwright = "^1.48.0"
+jsonschema = "^4.23.0"
+python-multipart = "^0.0.9"
+reportlab = "^4.2.5"
+passlib = {extras = ["bcrypt"], version = "^1.7.4"}
+python-jose = {extras = ["cryptography"], version = "^3.3.0"}
+email-validator = "^2.2.0"
+# passlib(1.7.4)는 bcrypt 4+에서 __about__ 제거로 호환 문제가 있어,
+# bcrypt 버전을 3.x로 고정합니다.
+bcrypt = "<4.0.0"
+pypdf = "^5.9.0"
+
+[tool.poetry.group.dev.dependencies]
+pytest = "^8.3.0"
+allure-pytest = "^2.13.5"
+
+[build-system]
+requires = ["poetry-core"]
+build-backend = "poetry.core.masonry.api"

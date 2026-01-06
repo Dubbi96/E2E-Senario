@@ -1,0 +1,147 @@
+<!doctype html>
+<html>
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Dubbi Recorder</title>
+    <style>
+      body {
+        font-family: system-ui, -apple-system, Segoe UI, Roboto, sans-serif;
+        margin: 0;
+        padding: 12px;
+        width: 340px;
+      }
+      .row {
+        display: grid;
+        gap: 6px;
+        margin-bottom: 10px;
+      }
+      label {
+        font-size: 12px;
+        color: #475467;
+        font-weight: 700;
+      }
+      input, select {
+        padding: 8px;
+        border: 1px solid #eaecf0;
+        border-radius: 10px;
+      }
+      button {
+        padding: 8px 10px;
+        border: 1px solid #eaecf0;
+        border-radius: 10px;
+        background: #fff;
+        font-weight: 800;
+        cursor: pointer;
+      }
+      button.primary {
+        background: #155eef;
+        border-color: #155eef;
+        color: white;
+      }
+      .muted {
+        color: #667085;
+        font-size: 12px;
+      }
+      .mono { font-family: ui-monospace, Menlo, monospace; }
+      .grid2 { display: grid; grid-template-columns: 1fr 1fr; gap: 8px; }
+      .err { color: #b42318; font-size: 12px; white-space: pre-wrap; }
+      .ok { color: #027a48; font-size: 12px; white-space: pre-wrap; }
+      hr { border: none; border-top: 1px solid #eaecf0; margin: 10px 0; }
+    </style>
+  </head>
+  <body>
+    <div class="row">
+      <div style="font-weight: 900">Dubbi Recorder (MVP)</div>
+      <div class="muted">액션/검증을 기록해서 개인 시나리오로 업로드합니다.</div>
+    </div>
+
+    <div class="row">
+      <label>API Base URL</label>
+      <input id="apiBaseUrl" placeholder="http://localhost:8000" />
+    </div>
+
+    <div class="row">
+      <label>JWT Token (Bearer)</label>
+      <input id="token" placeholder="eyJ..." />
+      <div class="muted">FE 로그인 후 localStorage의 token을 복사해 붙여넣는 MVP 방식입니다.</div>
+    </div>
+
+    <div class="row">
+      <label>시나리오 이름</label>
+      <input id="scenarioName" placeholder="recorded_scenario" />
+    </div>
+
+    <div class="grid2">
+      <button id="start" class="primary">녹화 시작</button>
+      <button id="stop">녹화 종료</button>
+    </div>
+
+    <hr />
+
+    <div class="row">
+      <label>검증 추가</label>
+      <select id="assertType">
+        <option value="assert_text">expect_text (요소 텍스트 포함)</option>
+        <option value="assert_visible">expect_visible (요소 보임)</option>
+        <option value="assert_url">expect_url (현재 URL)</option>
+      </select>
+      <button id="pick">요소 선택(피커)</button>
+      <div class="muted">피커 실행 후 웹페이지에서 요소를 클릭하면 검증 step이 추가됩니다.</div>
+    </div>
+
+    <hr />
+
+    <div class="row">
+      <div>현재 이벤트 수: <span id="count" class="mono">0</span></div>
+      <div class="grid2">
+        <button id="clear">비우기</button>
+        <button id="upload" class="primary">서버로 업로드</button>
+      </div>
+      <div id="msg" class="muted"></div>
+      <div id="err" class="err"></div>
+      <div id="ok" class="ok"></div>
+    </div>
+
+    <hr />
+
+    <div class="row">
+      <div style="font-weight: 900">Hogak 로그인 세션(storageState) Export</div>
+      <div class="muted">
+        “웹 페이지 버튼 하나”는 불가능하므로, 확장 프로그램 권한으로 쿠키(HttpOnly 포함)+localStorage를 수집해
+        Playwright storageState.json을 만듭니다. <b>로그인된 Hogak 탭</b>을 활성화한 상태에서 실행하세요.
+      </div>
+    </div>
+
+    <div class="row">
+      <label>세션 이름</label>
+      <input id="authStateName" placeholder="hogak-google" />
+    </div>
+
+    <div class="row">
+      <label>Provider</label>
+      <select id="authProvider">
+        <option value="google">google</option>
+        <option value="kakao">kakao</option>
+        <option value="naver">naver</option>
+        <option value="apple">apple</option>
+        <option value="unknown">unknown</option>
+      </select>
+      <div class="muted">권장: Google 테스트 계정</div>
+    </div>
+
+    <div class="grid2">
+      <button id="exportStorageState">다운로드(.json)</button>
+      <button id="exportAndUploadStorageState" class="primary">Export + 서버 업로드</button>
+    </div>
+
+    <div class="row">
+      <button id="autoFillToken">토큰 자동 채우기(현재 탭이 Dubbi FE일 때)</button>
+      <div class="muted">Dubbi FE에서 로그인한 탭을 활성화한 뒤 누르면 localStorage의 access_token을 읽어옵니다.</div>
+    </div>
+
+    <script src="popup.js"></script>
+  </body>
+</html>
+
+

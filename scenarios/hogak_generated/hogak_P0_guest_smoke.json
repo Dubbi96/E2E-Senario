@@ -1,0 +1,71 @@
+{
+  "base_url": "https://hogak.live",
+  "requires_auth": false,
+  "_meta": {
+    "source": "xlsx: NAV-03 + SRCH-01 + (부분) PLAY-01",
+    "note": "Apple/SNS 로그인 없이도 가능한 범위만 스모크로 커버합니다."
+  },
+  "steps": [
+    {
+      "type": "go",
+      "url": "https://hogak.live/main",
+      "delay_ms": 1200
+    },
+    {
+      "type": "wait_visible",
+      "text": "경기일정",
+      "timeout": 15000
+    },
+    {
+      "type": "ensure_logged_out",
+      "selector": "#btnUser",
+      "logged_out_text": "로그인"
+    },
+    {
+      "type": "go",
+      "url": "https://hogak.live/search",
+      "delay_ms": 1200
+    },
+    {
+      "type": "wait_visible",
+      "text": "검색",
+      "timeout": 15000
+    },
+    {
+      "type": "fill",
+      "selector": "input[type='search'], input[placeholder*='검색'], #searchInput",
+      "value": "K리그",
+      "delay_ms": 300
+    },
+    {
+      "type": "click",
+      "selectors": [
+        "#btnSearch",
+        "button:has-text('검색')",
+        "button[type='submit']",
+        ".btn_search"
+      ]
+    },
+    {
+      "type": "wait_visible",
+      "text": "검색결과",
+      "timeout": 15000
+    },
+    {
+      "type": "go",
+      "url": "https://hogak.live/vod",
+      "delay_ms": 1200
+    },
+    {
+      "type": "wait_visible",
+      "text": "VOD",
+      "timeout": 15000
+    },
+    {
+      "type": "screenshot",
+      "name": "guest_smoke_final"
+    }
+  ]
+}
+
+
