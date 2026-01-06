@@ -1,0 +1,40 @@
+# --- Python ---
+.venv/
+__pycache__/
+*.pyc
+.pytest_cache/
+
+# --- OS / IDE ---
+.DS_Store
+.cursor/
+.vscode/
+
+# --- Local runtime data (DO NOT COMMIT) ---
+artifacts/
+test_run_artifacts/
+hogak_crawl_output/
+scenario_store/
+auth_state_store/
+
+# storageState exports (secrets)
+hogak.storage_state.json
+*.storage_state.json
+
+# --- Frontend ---
+frontend/node_modules/
+frontend/dist/
+
+# --- Large test assets / generated screenshots ---
+scenarios/*.png
+scenarios/*.jsonl
+scenarios/step_log.jsonl
+scenarios/debug_checkpoints.jsonl
+
+# --- Playwright traces/artifacts (generic) ---
+**/trace.zip
+**/*.pdf
+
+# --- Temporary ---
+tmp_automato_ext/
+
+

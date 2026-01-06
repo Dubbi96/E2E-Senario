@@ -122,18 +122,30 @@ async function uploadStorageState({ apiBaseUrl, token, name, provider, storageSt
   fd.set('name', name || 'hogak-google')
   fd.set('provider', provider || 'google')
   fd.set('storage_state', blob, 'storage_state.json')
-  const ctrl = new AbortController()
-  const t = setTimeout(() => ctrl.abort(), 12_000)
-  const res = await fetch(`${base}/auth-states`, {
-    method: 'POST',
-    headers: { Authorization: `Bearer ${token}` },
-    body: fd,
-    signal: ctrl.signal,
-  })
-  clearTimeout(t)
-  const data = await res.json().catch(() => ({}))
-  if (!res.ok) throw new Error(data?.detail || res.statusText)
-  return data
+  // 배포 환경에서는 cold start/IO로 12s를 넘길 수 있어 타임아웃을 넉넉히 둡니다.
+  const attempt = async (timeoutMs) => {
+    const ctrl = new AbortController()
+    const t = setTimeout(() => ctrl.abort(), timeoutMs)
+    try {
+      const res = await fetch(`${base}/auth-states`, {
+        method: 'POST',
+        headers: { Authorization: `Bearer ${token}` },
+        body: fd,
+        signal: ctrl.signal,
+      })
+      const data = await res.json().catch(() => ({}))
+      if (!res.ok) throw new Error(data?.detail || res.statusText)
+      return data
+    } finally {
+      clearTimeout(t)
+    }
+  }
+  // 1차 60s, 실패하면 1회 재시도(90s)
+  try {
+    return await attempt(60_000)
+  } catch (e) {
+    return await attempt(90_000)
+  }
 }
 
 function flattenEvents(events) {
